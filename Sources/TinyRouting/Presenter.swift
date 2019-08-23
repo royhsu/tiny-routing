@@ -4,7 +4,7 @@ public struct Presenter<Destination>: Router {
     
     public typealias Presentation = (
         _ destionation: Destination,
-        _ completion: (() -> Void)?
+        _ completion: @escaping () -> Void
     )
     -> Void
     
@@ -18,7 +18,7 @@ public struct Presenter<Destination>: Router {
     
     public func start(_ route: Route<Destination>) {
         
-        presentation(route.destination(), route._onArrive)
+        presentation(route.destination()) { route._onArrive?() }
         
     }
     

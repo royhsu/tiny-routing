@@ -14,7 +14,7 @@ final class PresenterTests: XCTestCase {
             
             XCTAssertEqual(destination, .home)
             
-            completion?()
+            completion()
                 
         }
             .start(

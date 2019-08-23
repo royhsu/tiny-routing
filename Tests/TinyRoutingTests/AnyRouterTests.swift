@@ -8,7 +8,7 @@ final class AnyRouterTests: XCTestCase {
     
     func testInitialize() {
         
-        _ = AnyRouter<Destination>(Presenter { _, completion in completion?() })
+        _ = AnyRouter<Destination>(Presenter { _, completion in completion() })
         
     }
 

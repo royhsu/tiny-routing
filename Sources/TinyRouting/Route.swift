@@ -6,9 +6,19 @@ public struct Route<Destination> {
     
     private(set) var _onArrive: (() -> Void)?
     
-    public init(destination: @escaping @autoclosure () -> Destination) {
+    public init(destination: @escaping () -> Destination) {
         
         self.destination = destination
+        
+    }
+    
+}
+
+extension Route {
+    
+    public init(destination: @autoclosure @escaping () -> Destination) {
+        
+        self.init { destination() }
         
     }
     
