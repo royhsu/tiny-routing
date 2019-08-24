@@ -73,9 +73,17 @@ class ColorViewController: UIViewController {
     @objc
     func showNext(_ sender: UIButton) {
         
-//        rootHost.start(Route(destination: makeNextViewController))
+        rootHost
+            .transition(
+                AnyTransition
+                    .flipFromBottom
+                    .animation(.linear(duration: 2.0))
+            )
+            .start(
+                Route(destination: makeNextViewController)
+            )
         
-        presenter.start(Route(destination: makeNextViewController))
+//        presenter.start(Route(destination: makeNextViewController))
         
     }
     
