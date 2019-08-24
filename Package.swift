@@ -4,6 +4,7 @@ import PackageDescription
 
 let package = Package(
     name: "TinyRouting",
+    platforms: [ .iOS(.v8), ],
     products: [
         .library(
             name: "TinyRouting",

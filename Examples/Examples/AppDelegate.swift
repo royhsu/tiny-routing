@@ -6,6 +6,7 @@
 //  Copyright © 2019 TinyWorld. All rights reserved.
 //
 
+import TinyRouting
 import UIKit
 
 @UIApplicationMain
@@ -15,11 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        let viewController = ViewController(rootHost: RootHost(window: { self.window }))
-        
-        viewController.view.backgroundColor = .white
-        
-        window.rootViewController = viewController
+        window.rootViewController = ColorViewController(
+            rootHost: RootHost(window: self.window)
+        )
 
         window.makeKeyAndVisible()
         

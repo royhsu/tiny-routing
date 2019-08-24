@@ -1,19 +1,21 @@
 //
-//  ViewController.swift
+//  ColorViewController.swift
 //  Examples
 //
 //  Created by Roy Hsu on 2019/8/23.
 //  Copyright © 2019 TinyWorld. All rights reserved.
 //
 
-import UIKit
+// MARK: - ColorViewController
+
 import TinyRouting
+import UIKit
 
-class ViewController: UIViewController {
+class ColorViewController: UIViewController {
 
-    let rootHost: RootHost<UIViewController>
+    let rootHost: RootHost
     
-    init(rootHost: RootHost<UIViewController>) {
+    init(rootHost: RootHost) {
         
         self.rootHost = rootHost
         
@@ -31,13 +33,27 @@ class ViewController: UIViewController {
         
         super.viewDidLoad()
         
+        let colors: [UIColor] = [
+            .red,
+            .orange,
+            .blue,
+            .purple,
+            .darkGray,
+            .brown,
+            .magenta,
+        ]
+        
+        view.backgroundColor = colors.randomElement()
+        
         let button = UIButton(type: .system)
         
-        button.setTitle("Show destination", for: .normal)
+        button.setTitle("Next", for: .normal)
+        
+        button.setTitleColor(.white, for: .normal)
         
         button.addTarget(
             self,
-            action: #selector(showDestination),
+            action: #selector(showNext),
             for: .touchUpInside
         )
         
@@ -55,23 +71,17 @@ class ViewController: UIViewController {
     }
     
     @objc
-    func showDestination(_ sender: UIButton) {
+    func showNext(_ sender: UIButton) {
         
-        presenter
-            .start(
-                Route(destination: makeDestinationViewController)
-                    .onArrive { print("Destination arrvies!") }
-            )
+//        rootHost.start(Route(destination: makeNextViewController))
+        
+        presenter.start(Route(destination: makeNextViewController))
         
     }
     
-    private func makeDestinationViewController() -> UIViewController {
-           
-        let redViewController = UIViewController()
+    private func makeNextViewController() -> UIViewController {
         
-        redViewController.view.backgroundColor = .red
-        
-        return redViewController
+        return ColorViewController(rootHost: rootHost)
         
     }
     

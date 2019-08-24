@@ -4,7 +4,8 @@ import XCTest
 public func allTests() -> [XCTestCaseEntry] {
     return [
         testCase(AnyRouterTests.allTests),
-        testCase(RouteTests.allTests),
+        testCase(PresenterTests.allTests),
+        testCase(RootHost_UIKitTests.allTests),
     ]
 }
 #endif
