@@ -11,17 +11,33 @@ import TinyRouting
 
 class ViewController: UIViewController {
 
+    let rootHost: RootHost<UIViewController>
+    
+    init(rootHost: RootHost<UIViewController>) {
+        
+        self.rootHost = rootHost
+        
+        super.init(nibName: nil, bundle: nil)
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        
+        fatalError("init(coder:) has not been implemented")
+        
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         let button = UIButton(type: .system)
         
-        button.setTitle("Present", for: .normal)
+        button.setTitle("Show destination", for: .normal)
         
         button.addTarget(
             self,
-            action: #selector(presentRed),
+            action: #selector(showDestination),
             for: .touchUpInside
         )
         
@@ -39,29 +55,37 @@ class ViewController: UIViewController {
     }
     
     @objc
-    func presentRed(_ sender: UIButton) {
+    func showDestination(_ sender: UIButton) {
         
-        Presenter<UIViewController> { destinationViewController, completion in
-            
+        presenter
+            .start(
+                Route(destination: makeDestinationViewController)
+                    .onArrive { print("Destination arrvies!") }
+            )
+        
+    }
+    
+    private func makeDestinationViewController() -> UIViewController {
+           
+        let redViewController = UIViewController()
+        
+        redViewController.view.backgroundColor = .red
+        
+        return redViewController
+        
+    }
+    
+    private var presenter: Presenter<UIViewController> {
+        
+        Presenter { destinationViewController, completion in
+
             self.present(
                 destinationViewController,
                 animated: true,
                 completion: completion
             )
-            
+
         }
-        .start(
-            Route {
-                
-                let redViewController = UIViewController()
-                
-                redViewController.view.backgroundColor = .red
-                
-                return redViewController
-            
-            }
-                .onArrive { print("Red!") }
-        )
         
     }
 
