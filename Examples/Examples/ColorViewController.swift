@@ -81,6 +81,7 @@ class ColorViewController: UIViewController {
             )
             .start(
                 Route(destination: makeNextViewController)
+                    .onArrive { print("Declarative programming is awesome!") }
             )
         
 //        presenter.start(Route(destination: makeNextViewController))
